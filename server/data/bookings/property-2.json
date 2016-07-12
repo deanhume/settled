@@ -1,0 +1,27 @@
+{
+  "propertyID": "2",
+  "bookingSlots": {
+    "booking": [
+      {
+        "bookingId": 22,
+        "bookingDate": "2016-06-12T09:00:00.000Z",
+        "bookerId": 12
+      },
+      {
+        "bookingId": 23,
+        "bookingDate": "2016-06-12T11:00:00.000Z",
+        "bookerId": 14
+      },
+      {
+        "bookingId": 24,
+        "bookingDate": "2016-09-12T16:00:00.000Z",
+        "bookerId": 44
+      },
+      {
+        "bookingId": 25,
+        "bookingDate": "2016-10-12T16:00:00.000Z",
+        "bookerId": 66
+      }
+    ]
+  }
+}

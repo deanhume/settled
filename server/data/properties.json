@@ -1,0 +1,42 @@
+{
+  "properties": {
+    "property": [
+      {
+        "propertyId": 1,
+        "sellerId": 12,
+        "propertyName": "5 bedroom semi-detached house for sale",
+        "propertyDescription": "An immaculately presented five bed, two bath family home situated in this popular residential location close to both East Sheen and Richmond town centre."
+      },
+      {
+        "propertyId": 2,
+        "sellerId": 678,
+        "propertyName": "7 bedroom house for sale",
+        "propertyDescription": "Majestic Victorian residence of immense stature wonderfully refurbished and completed to an exemplary standard."
+      },
+      {
+        "propertyId": 3,
+        "sellerId": 443,
+        "propertyName": "8 bedroom detached house for sale",
+        "propertyDescription": "A wonderfully located detached & lateral family home."
+      },
+      {
+        "propertyId": 4,
+        "sellerId": 98,
+        "propertyName": "6 bedroom house for sale",
+        "propertyDescription": "test"
+      },
+      {
+        "propertyId": 5,
+        "sellerId": 223,
+        "propertyName": "4 bedroom penthouse for sale",
+        "propertyDescription": "Apartment 86 is one of London Square's impressively spacious four bedroom duplexes offering 2,885 sq ft of accommodation over Levels H and I of the prestigious Star and Garter development in Richmond."
+      },
+      {
+        "propertyId": 6,
+        "sellerId": 43,
+        "propertyName": "5 bedroom semi-detached house for sale",
+        "propertyDescription": "An immaculately presented five bed, two bath family home situated in this popular residential location close to both East Sheen and Richmond town centre."
+      }
+    ]
+  }
+}
