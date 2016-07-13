@@ -55,15 +55,15 @@
     networkTimeoutSeconds: 4
   });
 
-  toolbox.router.get('/js/(.*)', global.toolbox.cacheFirst, {
-    cache: {
-      name: 'settled-javascript',
-      maxEntries: 10,
-      maxAgeSeconds: 604800
-    },
-    // Set a timeout threshold of 2 seconds
-    networkTimeoutSeconds: 4
-  });
+  // toolbox.router.get('/js/(.*)', global.toolbox.cacheFirst, {
+  //   cache: {
+  //     name: 'settled-javascript',
+  //     maxEntries: 10,
+  //     maxAgeSeconds: 604800
+  //   },
+  //   // Set a timeout threshold of 2 seconds
+  //   networkTimeoutSeconds: 4
+  // });
 
   // Ensure that our service worker takes control of the page as soon as possible.
   global.addEventListener('install', event => event.waitUntil(global.skipWaiting()));

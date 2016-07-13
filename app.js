@@ -94,12 +94,18 @@ app.post('/messages/', function (req, res) {
 });
 
 // Bookings - Get by property
-app.get('/bookings/:propertyId', function (req, res) {
+app.get('/bookings/:propertyId?/date/:date?', function (req, res) {
   // Check if we received a propertyId
   var propertyId = req.params.propertyId;
   if (propertyId === undefined)
   {
     res.status(400).send('Missing propertyId');
+  }
+
+  //  Check if want specific dates
+  var returnAll = true;
+  if (req.params.date){
+    returnAll = false;
   }
 
   // Read the file per propertyId
@@ -110,9 +116,26 @@ app.get('/bookings/:propertyId', function (req, res) {
         res.status(500).send('Error reading bookings or no such property.');
       }
 
+      console.log(date);
+
       // Parse the data
       var obj = JSON.parse(data);
-      res.json(obj);
+      // if (returnAll){
+        res.json(obj);
+      // }
+      // else{
+      //   var bookings = obj.bookingSlots.booking;
+      //   var result = [];
+      //
+      //   // Loop through the bookings and find any that match our date
+      //   for (var i = 0; i < bookings.length; i++) {
+      //     if (bookings[i].bookingDate == ){
+      //       result.push(bookings[i]);
+      //     }
+      //   }
+      //
+      //   res.json(result);
+      // }
   });
 });
 

@@ -124,6 +124,11 @@
                 <option value="22">10pm - 11pm</option>
               </select>
             </div>
+            <div class="mdl-card__actions mdl-card--border">
+              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick="createBooking();return false;" id="bookingButton">
+                Choose this time and date
+              </a>
+            </div>
           </div>
         </div>
 
@@ -131,6 +136,7 @@
     </div>
     <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
     <script src="./js/pikaday.js"></script>
+    <script src="./js/bookings.js"></script>
       <script>
         var field = document.getElementById('datepicker');
         var timePickerCard = document.getElementById('timePicker');
@@ -139,7 +145,8 @@
             onSelect: function(date) {
                 field.value = picker.toString();
                 timePickerCard.style.visibility='visible';
-
+                var date = picker._d.getDate() + '-' + picker._d.getMonth() + '-' + picker._d.getFullYear();
+                fetchBookings(date);
             }
         });
     field.parentNode.insertBefore(picker.el, field.nextSibling);
