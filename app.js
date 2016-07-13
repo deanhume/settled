@@ -12,29 +12,16 @@ app.use("/css", express.static(__dirname + '/css'));
 app.use("/js", express.static(__dirname + '/js'));
 app.use(express.static('public'));
 
-
-// Properties - Get All
-app.get('/properties/', function (req, res) {
-  fs.readFile('./data/properties.json', 'utf8', function (err, data) {
-      // Did anything go wrong?
-      if (err) {
-        res.status(500).send('Error reading properties.');
-      }
-
-      // Parse the data
-      var obj = JSON.parse(data);
-      res.json(obj);
-  });
-});
-
 // Messages - Get by property
-app.get('/messages/:propertyId', function (req, res) {
+app.get('/messages/:propertyId/user/:userId?/seller/:sellerId?', function (req, res) {
   // Check if we received a propertyId
   var propertyId = req.params.propertyId;
-  if (propertyId === undefined)
-  {
+  if (propertyId === undefined) {
     res.status(400).send('Missing propertyId');
   }
+
+  var userId = req.params.userId;
+  var sellerId = req.params.sellerId;
 
   // Read the file per propertyId
   var filePath = './data/messages/property-' + propertyId + '.json';
@@ -46,7 +33,22 @@ app.get('/messages/:propertyId', function (req, res) {
 
       // Parse the data
       var obj = JSON.parse(data);
-      res.json(obj);
+      var result = [];
+
+      try {
+        // Loop through the result and find any matches
+        for (var i = 0; i < obj.messages.message.length; i++) {
+          var message = obj.messages.message[i];
+          // check if its either the seller or current user
+          if (message.senderId == userId || message.senderId == sellerId){
+            result.push(message);
+          }
+        }
+      } catch (e) {
+        es.status(500).send('Error reading message or no such property.');
+      }
+
+      res.json(result);
   });
 });
 
@@ -115,7 +117,7 @@ app.get('/bookings/:propertyId', function (req, res) {
 });
 
 // Bookings - Create
-//curl -X POST -H 'Content-Type: application/json' -d '{"propertyId":"1","bookingId":"556","bookingDate":"something", "bookerId":"something"}' http://localhost:3000/bookings/
+// curl -X POST -H 'Content-Type: application/json' -d '{"propertyId":"1","bookingId":"556","bookingDate":"something", "bookerId":"something"}' http://localhost:3000/bookings/
 app.post('/bookings/', function (req, res) {
 
   // Read the body
@@ -152,6 +154,37 @@ app.post('/bookings/', function (req, res) {
 
           res.json('{result: "Booking updated."}');
       });
+  });
+});
+
+// Properties - Get All
+app.get('/properties/:propertyId?', function (req, res) {
+  var returnAll = true;
+
+  // Check if we received a propertyId
+  var propertyId = req.params.propertyId;
+  if (propertyId != undefined)
+  {
+    returnAll = false; // We should return a specific propertyId
+  }
+
+  fs.readFile('./data/properties.json', 'utf8', function (err, data) {
+      // Did anything go wrong?
+      if (err) {
+        res.status(500).send('Error reading properties.');
+      }
+
+      // Parse the data
+      var obj = JSON.parse(data);
+
+      // Do we want to return all records or only a specific property
+      if (returnAll) {
+          res.json(obj);
+      }
+      else {
+        if (propertyId > 0) { propertyId = propertyId - 1; } // Zero based index
+        res.json(obj.properties.property[propertyId]);
+      }
   });
 });
 

@@ -84,13 +84,13 @@
         <div class="mdl-cell mdl-cell--12-col mdl-grid">
           <div class="demo-card-wide mdl-card mdl-shadow--2dp">
             <div class="mdl-card__title">
-              <h2 class="mdl-card__title-text">5 bedroom semi-detached house for sale</h2>
+              <h2 class="mdl-card__title-text" id="propertyName">{{propertyName}}</h2>
             </div>
             <div class="mdl-card__supporting-text">
-               <img src="./data/images/1.jpg" /><p style="width: 300px;float: right;">An immaculately presented five bed, two bath family home situated in this popular residential location close to both East Sheen and Richmond town centre.</p>
+               <img src="./data/images/1.jpg" /><p style="width: 300px;float: right;" id="propertyDescription">{{propertyDescription}}</p>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="./bookings.html?propertyId=1">
+              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="" id="bookingUrl">
                 Make a booking
               </a>
             </div>
@@ -99,32 +99,12 @@
         <div class="mdl-cell mdl-cell--4-col mdl-grid">
           <h4>Your Messages</h4>
         </div>
-         <!-- message -->
-        <div class="mdl-cell mdl-cell--4-col mdl-grid">
-          <div class="mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title" style="background-color:steelblue;">
-              <h2 class="mdl-card__title-text">From</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
-              <h6>subject</h6>
-              Some supporting text goes here
-            </div>
-          </div>
-        </div>
-        <!-- message 2 -->
-       <div class="mdl-cell mdl-cell--4-col mdl-grid">
-         <div class="mdl-card mdl-shadow--2dp" style="margin-left:40px;">
-           <div class="mdl-card__title" style="background-color:lightgreen;">
-             <h2 class="mdl-card__title-text">From</h2>
-           </div>
-           <div class="mdl-card__supporting-text">
-             <h6>subject</h6>
-             Some supporting text goes here
-           </div>
-         </div>
-       </div>
+        <!-- messages -->
+        <div id="messages"></div>
       </main>
     </div>
-    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <script async src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <script src="./js/fetch.js"></script>
+    <script src="./js/messages.js"></script>
   </body>
 </html>

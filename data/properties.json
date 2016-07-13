@@ -3,19 +3,19 @@
     "property": [
       {
         "propertyId": 1,
-        "sellerId": 12,
+        "sellerId": 2,
         "propertyName": "5 bedroom semi-detached house for sale",
         "propertyDescription": "An immaculately presented five bed, two bath family home situated in this popular residential location close to both East Sheen and Richmond town centre."
       },
       {
         "propertyId": 2,
-        "sellerId": 678,
+        "sellerId": 3,
         "propertyName": "7 bedroom house for sale",
         "propertyDescription": "Majestic Victorian residence of immense stature wonderfully refurbished and completed to an exemplary standard."
       },
       {
         "propertyId": 3,
-        "sellerId": 443,
+        "sellerId": 5,
         "propertyName": "8 bedroom detached house for sale",
         "propertyDescription": "A wonderfully located detached & lateral family home."
       },
