@@ -5,7 +5,7 @@
   importScripts('./js/sw-toolbox/sw-toolbox.js');
 
   // Turn on debug logging, visible in the Developer Tools' console.
-  global.toolbox.options.debug = true;
+  global.toolbox.options.debug = false;
 
   // We want to precache the following items
   toolbox.precache([ '/bookings.html',

@@ -37,7 +37,7 @@ function createMessage(){
 
   // Notify the user
   var newMessageDiv = document.getElementById('newMessage');
-  newMessageDiv.innerHTML = '<div class=\"mdl-cell mdl-cell--4-col mdl-grid\"><div class=\"mdl-card mdl-shadow--2dp\"><div class=\"mdl-card__title\"><h2 class=\"mdl-card__title-text\">Message Sent!</h2></div></div></div>';
+  newMessageDiv.innerHTML = '<div class=\"mdl-cell mdl-cell--4-col mdl-grid\"><div class=\"mdl-card mdl-shadow--2dp\"><div class=\"mdl-card__title\"><h2 class=\"mdl-card__title-text\">Message Sent!</h2></div><div class=\"mdl-card__supporting-text\"><i class="material-icons" style=\"font-size: 240px;\">done</i></div></div></div>';
 }
 
 // Get the details from the querystring

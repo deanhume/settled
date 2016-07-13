@@ -45,7 +45,7 @@
       <!-- header -->
       <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Bookings</span>
+          <span class="mdl-layout-title">Book a Viewing</span>
           <div class="mdl-layout-spacer"></div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
             <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
@@ -84,10 +84,10 @@
         <div class="mdl-cell mdl-cell--12-col mdl-grid">
           <div class="demo-card-wide mdl-card mdl-shadow--2dp">
             <div class="mdl-card__title">
-              <h2 class="mdl-card__title-text">5 bedroom semi-detached house for sale</h2>
+              <h2 class="mdl-card__title-text" id="propertyName"></h2>
             </div>
             <div class="mdl-card__supporting-text">
-               <img src="./data/images/1.jpg" /><p style="width: 300px;float: right;">An immaculately presented five bed, two bath family home situated in this popular residential location close to both East Sheen and Richmond town centre.</p>
+               <img src="./data/images/1.jpg" /><p style="width: 300px;float: right;" id="propertyDescription"></p>
             </div>
           </div>
         </div>
@@ -107,17 +107,18 @@
               <h2 class="mdl-card__title-text">Please pick a time for your viewing.</h2>
             </div>
             <div class="mdl-card__supporting-text">
-              <select name="select">
+              <select name="select" id="dateSelect">
+                <option disabled selected hidden>Please select an available timeslot</option>
                 <option value="9">9am - 10am</option>
                 <option value="10">10am - 11am</option>
-                <option value="11" disabled>11am - 12pm</option>
+                <option value="11">11am - 12pm</option>
                 <option value="12">12pm - 1pm</option>
                 <option value="13">1pm - 2pm</option>
                 <option value="14">2pm - 3pm</option>
-                <option value="15" disabled>3pm - 4pm</option>
+                <option value="15">3pm - 4pm</option>
                 <option value="16">4pm - 5pm</option>
                 <option value="17">5pm - 6pm</option>
-                <option value="18" disabled>6pm - 7pm</option>
+                <option value="18">6pm - 7pm</option>
                 <option value="19">7pm - 8pm</option>
                 <option value="20">8pm - 9pm</option>
                 <option value="21">9pm - 10pm</option>
@@ -137,31 +138,26 @@
     <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
     <script src="./js/pikaday.js"></script>
     <script src="./js/bookings.js"></script>
-      <script>
-        var field = document.getElementById('datepicker');
-        var timePickerCard = document.getElementById('timePicker');
-
-        var picker = new Pikaday({
-            onSelect: function(date) {
-                field.value = picker.toString();
-                timePickerCard.style.visibility='visible';
-                var date = picker._d.getDate() + '-' + picker._d.getMonth() + '-' + picker._d.getFullYear();
-                fetchBookings(date);
-            }
-        });
-    field.parentNode.insertBefore(picker.el, field.nextSibling);
-  </script>
-  <script>
-    // Register the service worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-        // Registration was successful
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }).catch(function(err) {
-        // registration failed :(
-          console.log('ServiceWorker registration failed: ', err);
-        });
-    }
+    <script>
+      var field = document.getElementById('datepicker');
+      var picker = new Pikaday({
+          onSelect: function(date) {
+              field.value = picker.toString();
+              var chosenDate = picker._d.getFullYear() + '-' + picker._d.getMonth() + '-' + picker._d.getDate();
+              fetchBookings(chosenDate);
+          }
+      });
+      field.parentNode.insertBefore(picker.el, field.nextSibling);
+      // Register the service worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+          // Registration was successful
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }).catch(function(err) {
+          // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      }
   </script>
   </body>
 </html>

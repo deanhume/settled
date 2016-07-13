@@ -93,10 +93,11 @@ app.post('/messages/', function (req, res) {
   });
 });
 
-// Bookings - Get by property
-app.get('/bookings/:propertyId?/date/:date?', function (req, res) {
+// Bookings - Get by property and date
+app.get('/bookings/:propertyId?/date/:bookingDate?', function (req, res) {
   // Check if we received a propertyId
   var propertyId = req.params.propertyId;
+  var bookingDate = req.params.bookingDate;
   if (propertyId === undefined)
   {
     res.status(400).send('Missing propertyId');
@@ -104,7 +105,7 @@ app.get('/bookings/:propertyId?/date/:date?', function (req, res) {
 
   //  Check if want specific dates
   var returnAll = true;
-  if (req.params.date){
+  if (bookingDate){
     returnAll = false;
   }
 
@@ -116,26 +117,30 @@ app.get('/bookings/:propertyId?/date/:date?', function (req, res) {
         res.status(500).send('Error reading bookings or no such property.');
       }
 
-      console.log(date);
-
       // Parse the data
       var obj = JSON.parse(data);
-      // if (returnAll){
+       if (returnAll){
         res.json(obj);
-      // }
-      // else{
-      //   var bookings = obj.bookingSlots.booking;
-      //   var result = [];
-      //
-      //   // Loop through the bookings and find any that match our date
-      //   for (var i = 0; i < bookings.length; i++) {
-      //     if (bookings[i].bookingDate == ){
-      //       result.push(bookings[i]);
-      //     }
-      //   }
-      //
-      //   res.json(result);
-      // }
+      }
+      else{
+        var bookings = obj.bookingSlots.booking;
+        var result = [];
+
+        // Loop through the bookings and find any that match our date
+        for (var i = 0; i < bookings.length; i++) {
+          var currentDate = new Date(bookings[i].bookingDate);
+          var chosenDate = new Date(bookingDate);
+
+          // Check if the date matches our chosenDate
+          if ((currentDate.getDate() == chosenDate.getDate())
+          && (currentDate.getMonth() == chosenDate.getMonth())
+          && (currentDate.getFullYear() == chosenDate.getFullYear())){
+            result.push(bookings[i]); // Add to the return result
+          }
+        }
+
+        res.json(result);
+      }
   });
 });
 
@@ -165,6 +170,8 @@ app.post('/bookings/', function (req, res) {
 
       // Parse the data
       var obj = JSON.parse(data);
+
+      console.log(bookingDate);
 
       // Add the new booking
       obj.bookingSlots.booking.push({bookingId: bookingId, bookingDate: bookingDate, bookerId: bookerId});
