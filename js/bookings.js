@@ -29,7 +29,12 @@ function fetchBookings(dateToCheck){
 
     // Create the selector
     for (var i = 0; i < body.length; i++) {
-      var bookingTimeSlot = new Date(body[i].bookingDate).getUTCHours();
+
+      // Update according to timezone
+      var datePlusTimeZone = new Date(body[i].bookingDate);
+      datePlusTimeZone.setHours(datePlusTimeZone.getHours() - datePlusTimeZone.getTimezoneOffset() / 60);
+
+      var bookingTimeSlot = datePlusTimeZone.getUTCHours();
 
       // Update the selector with enabled / disabled
       // Not ideal as this is O(n) time complexity

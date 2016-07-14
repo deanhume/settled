@@ -53,7 +53,6 @@ app.get('/messages/:propertyId/user/:userId?/seller/:sellerId?', function (req, 
 });
 
 // Messages - Create
-//curl -X POST -H 'Content-Type: application/json' -d '{"propertyId":"1","senderId":"556","subject":"something", "message":"something"}' http://localhost:3000/messages/
 app.post('/messages/', function (req, res) {
 
   // Read the body
@@ -145,7 +144,6 @@ app.get('/bookings/:propertyId?/date/:bookingDate?', function (req, res) {
 });
 
 // Bookings - Create
-// curl -X POST -H 'Content-Type: application/json' -d '{"propertyId":"1","bookingId":"556","bookingDate":"something", "bookerId":"something"}' http://localhost:3000/bookings/
 app.post('/bookings/', function (req, res) {
 
   // Read the body
@@ -171,10 +169,10 @@ app.post('/bookings/', function (req, res) {
       // Parse the data
       var obj = JSON.parse(data);
 
-      console.log(bookingDate);
+      console.log(new Date(bookingDate));
 
       // Add the new booking
-      obj.bookingSlots.booking.push({bookingId: bookingId, bookingDate: bookingDate, bookerId: bookerId});
+      obj.bookingSlots.booking.push({bookingId: bookingId, bookingDate: new Date(bookingDate), bookerId: bookerId});
 
       // Save the file
       fs.writeFile(filePath, JSON.stringify(obj), function(err) {
@@ -219,5 +217,5 @@ app.get('/properties/:propertyId?', function (req, res) {
 });
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('Settled prototype listening on port 3000!');
 });
